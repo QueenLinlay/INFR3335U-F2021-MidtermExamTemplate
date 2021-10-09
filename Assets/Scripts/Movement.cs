@@ -5,9 +5,9 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 public class Movement : MonoBehaviour
 {
-	public float speed = 10.0f;
+    Rigidbody rigidbody;
+    public float speed = 10.0f;
     public int counter = 0;
-	Rigidbody rigidbody;
 
 	// Start is called before the first frame update
 	void Start()
@@ -37,14 +37,16 @@ public class Movement : MonoBehaviour
         {
             rigidbody.AddForce(veloInput * speed);
         }
-
         rigidbody.AddForce(veloInput * speed);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        counter = counter + 1;
-        if (counter == 10)
+        if (collision.collider.name == "Coins")
+        {
+            counter = counter + 1;
+        }
+        if (counter == 1)
         {
             SceneManager.LoadScene("End");
         }
